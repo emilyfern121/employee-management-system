@@ -87,7 +87,7 @@ const runSearch = () => {
       })
       .then((answer) => {
         const query = 'SELECT first_name FROM employee WHERE ?';
-        connection.query(query, { first_name: answer.first_name }, (err, res) => {
+        connection.query(query, {answer:answer.first_name }, (err, res) => {
           if (err) throw err;
           res.forEach(({ first_name }) => {
             console.log(
@@ -98,3 +98,6 @@ const runSearch = () => {
         });
       });
   };
+
+
+
