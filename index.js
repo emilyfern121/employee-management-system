@@ -10,16 +10,6 @@ const connection = mysql.createConnection({
 
 });
 
-// connection.connect((error) => {
-//     if (error) {
-//         console.log(err);
-//     } else {
-//         console.log("Connected to database succesfully");
-//     }
-
-// });
-
-
 
 connection.connect((err) => {
     if (err) throw err;
@@ -34,7 +24,7 @@ const runSearch = () => {
         choices: [
         'View all employees',
         'View all employees by departments',
-        'View all employees by Manager',
+        'View all employees by Role',
         'Add employee',
         'Add departments',
         'Add roles',
@@ -51,8 +41,8 @@ const runSearch = () => {
             viewDepartment();
             break;
   
-          case 'View all employees by Manager':
-            viewManager();
+          case 'View all employees by Role':
+            viewRole();
             break;
   
           case 'Add employee':
@@ -86,6 +76,24 @@ const runSearch = () => {
           runSearch();
         });
   };
+
+  const viewDepartment = () => {
+    const query = 'SELECT * FROM department';
+    connection.query(query,(err, res) => {
+      if (err) throw err;
+        console.table(res)
+      runSearch();
+    });
+};
+
+const viewRole = () => {
+  const query = 'SELECT * FROM role';
+  connection.query(query,(err, res) => {
+    if (err) throw err;
+      console.table(res)
+    runSearch();
+  });
+};
 
 
 
