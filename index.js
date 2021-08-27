@@ -79,24 +79,12 @@ const runSearch = () => {
   };
 
   const viewEmployee = () => {
-    inquirer
-      .prompt({
-        name: 'first_name',
-        type: 'input',
-        message: 'What employee would you like to view? Please enter first name',
-      })
-      .then((answer) => {
-        const query = 'SELECT first_name FROM employee WHERE ?';
-        connection.query(query, {answer:answer.first_name }, (err, res) => {
+        const query = 'SELECT * FROM employee';
+        connection.query(query,(err, res) => {
           if (err) throw err;
-          res.forEach(({ first_name }) => {
-            console.log(
-              `First Name: ${first_name}`
-            );
-          });
+            console.table(res)
           runSearch();
         });
-      });
   };
 
 
