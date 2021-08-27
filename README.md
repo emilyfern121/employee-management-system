@@ -4,4 +4,5 @@ This employee management system uses mysql, inquire and node I created a new dat
 
 Below is a video demo of the app: 
 
-https://user-images.githubusercontent.com/79679121/130337250-ed66076b-de17-43b5-8db0-e3ada379a490.mp4
+https://user-images.githubusercontent.com/79679121/131195332-b5584002-86c7-4a4c-8049-a3abc2424814.mp4
+
