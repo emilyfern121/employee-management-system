@@ -95,5 +95,47 @@ const viewRole = () => {
   });
 };
 
+const addEmployee = () => {
+  inquirer
+    .prompt([
+      {
+        name: 'name',
+        type: 'input',
+        message: 'What is their first name?',
+      },
+      {
+        name: 'lastName',
+        type: 'input',
+        message: 'What is their last name',
+      },
+      {
+        name: 'roleId',
+        type: 'input',
+        message: 'What is their role id?',
+      },
+      {
+        name: 'managerId',
+        type: 'input',
+        message: 'What is their manager id?',
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        'INSERT INTO employee SET ?',
+        {
+          first_name: answer.name,
+          last_name: answer.lastName,
+          role_id: answer.roleId,
+          manager_id: answer.managerId
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('Your employee was created successfully!');
+          start();
+        }
+      );
+    });
+};
+
 
 
