@@ -26,9 +26,9 @@ const runSearch = () => {
         'View all employees by departments',
         'View all employees by Role',
         'Add employee',
-        'Add departments',
-        'Add roles',
-        'Update employee roles',
+        'Add department',
+        'Add role',
+        'Update employee role',
       ],
     })
     .then((answer) => {
@@ -49,16 +49,16 @@ const runSearch = () => {
             addEmployee();
             break;
   
-          case 'Add departments':
+          case 'Add department':
             addDepartment();
             break;
             
-            case 'Add roles':
-                addRoles();
+            case 'Add role':
+                addRole();
                 break;
         
-        case 'Update employee roles':
-                updateRoles();
+        case 'Update employee role':
+                updateRole();
                 break;
 
           default:
@@ -131,7 +131,79 @@ const addEmployee = () => {
         (err) => {
           if (err) throw err;
           console.log('Your employee was created successfully!');
-          start();
+          runSearch();
+        }
+      );
+    });
+};
+
+const addDepartment = () => {
+  inquirer
+    .prompt([
+      {
+        name: 'name',
+        type: 'input',
+        message: 'What is the new department name?',
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        'INSERT INTO department SET ?',
+        {
+          name: answer.name,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('Your department was created successfully!');
+          runSearch();
+        }
+      );
+    });
+};
+
+const addRole = () => {
+  inquirer
+    .prompt([
+      {
+        name: 'role',
+        type: 'input',
+        message: 'What is the new title?',
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        'INSERT INTO role SET ?',
+        {
+          title: answer.role,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('Your role was created successfully!');
+          runSearch();
+        }
+      );
+    });
+};
+
+const updateRole = () => {
+  inquirer
+    .prompt([
+      {
+        name: 'role',
+        type: 'input',
+        message: 'What is the new title?',
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        'UPDATE role SET ?',
+        {
+          title: answer.role,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('Your role was created successfully!');
+          runSearch();
         }
       );
     });
